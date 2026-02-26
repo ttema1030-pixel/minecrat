@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunTime.su - Мир развлечений и позитива</title>
+    <meta name="description" content="FunTime.su - Ваш портал в мир развлечений. Игры, форум, аниматоры, квесты и море позитива каждый день!">
+    
+    <!-- Favicon (можно заменить на свой) -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Подключение стилей -->
+    <style>
+        /* Сброс стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Основные переменные цветов */
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a463f5;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #f9f9f9;
+            --gradient: linear-gradient(135deg, #6c5ce7, #a463f5, #fd79a8);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f7;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .logo span {
+            background: rgba(255,255,255,0.2);
+            padding: 0 10px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Кнопка меню для мобильных */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Основной контент */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* Блок Hero */
+        .hero {
+            background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(253,121,168,0.1));
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "🎉";
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            right: -20px;
+            bottom: -40px;
+            transform: rotate(15deg);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            margin-left: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Секция "Почему мы" */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        /* Секция с карточками услуг */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 60px 0 40px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.2);
+        }
+        
+        .service-img {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .service-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .service-link:hover {
+            gap: 10px;
+        }
+        
+        /* Форум превью */
+        .forum-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .forum-preview h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .topic-list {
+            list-style: none;
+        }
+        
+        .topic-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+        
+        .topic-title {
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        .topic-meta {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .forum-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        /* Блог превью */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #ddd;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .blog-title {
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+        
+        .blog-title a {
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        /* Подвал */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">FunTime<span>.su</span></a>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <nav>
+                <ul id="menu">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/services/">Услуги</a></li>
+                    <li><a href="/forum/">Форум</a></li>
+                    <li><a href="/blog/">Блог</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero секция -->
+        <section class="hero">
+            <h1>Добро пожаловать в FunTime!</h1>
+            <p>Твой портал в мир ярких эмоций, увлекательных игр и незабываемых впечатлений. Присоединяйся к самому позитивному сообществу!</p>
+            <div>
+                <a href="/register/" class="btn">Начать веселье 🎉</a>
+                <a href="/about/" class="btn btn-secondary">Узнать больше</a>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Игры и квесты</h3>
+                <p>Ежедневные обновления игр, захватывающие квесты и турниры с призами</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Активный форум</h3>
+                <p>Тысячи пользователей обсуждают последние новости и делятся опытом</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎪</div>
+                <h3>Аниматоры</h3>
+                <p>Профессиональные аниматоры для ваших праздников и мероприятий</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <h3>Конкурсы</h3>
+                <p>Регулярные розыгрыши призов и уникальные акции для активных</p>
+            </div>
+        </section>
+
+        <!-- Популярные услуги -->
+        <h2 class="section-title">Наши популярные услуги</h2>
+        <section class="services-grid">
+            <div class="service-card">
+                <div class="service-img">🎈</div>
+                <div class="service-content">
+                    <h3>Детские праздники</h3>
+                    <p>Организация дней рождений с любимыми героями, шоу мыльных пузырей и сладкая вата</p>
+                    <a href="/service/children/" class="service-link">Подробнее →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">🎯</div>
+                <div class="service-content">
+                    <h3>Квест-комнаты</h3>
+                    <p>Увлекательные квесты для компаний от 2 до 6 человек. 5 захватывающих сценариев</p>
+                    <a href="/service/quests/" class="service-link">Подробнее →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">🎤</div>
+                <div class="service-content">
+                    <h3>Караоке-вечеринки</h3>
+                    <p>Аренда караоке-системы, профессиональное оборудование и ведущий</p>
+                    <a href="/service/karaoke/" class="service-link">Подробнее →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форум (последние темы) -->
+        <section class="forum-preview">
+            <h2>🔥 Актуальное на форуме</h2>
+            <ul class="topic-list">
+                <li class="topic-item">
+                    <a href="/forum/topic/1" class="topic-title">Как организовать идеальный детский праздник?</a>
+                    <span class="topic-meta">15 ответов · 2 часа назад</span>
+                </li>
+                <li class="topic-item">
+                    <a href="/forum/topic/2" class="topic-title">Турнир по Among Us: регистрация открыта!</a>
+                    <span class="topic-meta">34 ответа · вчера</span>
+                </li>
+                <li class="topic-item">
+                    <a href="/forum/topic/3" class="topic-title">Советы по выбору аниматора на выпускной</a>
+                    <span class="topic-meta">8 ответов · 3 дня назад</span>
+                </li>
+                <li class="topic-item">
+                    <a href="/forum/topic/4" class="topic-title">Фотоотчет с прошедшего квеста "Пираты Карибского моря"</a>
+                    <span class="topic-meta">21 ответ · 5 дней назад</span>
+                </li>
+            </ul>
+            <a href="/forum/" class="forum-link">Перейти на форум →</a>
+        </section>
+
+        <!-- Последние статьи блога -->
+        <h2 class="section-title">Полезные статьи</h2>
+        <section class="blog-grid">
+            <div class="blog-card">
+                <img src="/api/placeholder/400/200" alt="Блог">
+                <div class="blog-content">
+                    <div class="blog-date">15 января 2024</div>
+                    <h3 class="blog-title"><a href="/blog/party-ideas">10 идей для незабываемой вечеринки</a></h3>
+                    <p>Собрали лучшие сценарии и фишки для вашего праздника...</p>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="/api/placeholder/400/200" alt="Блог">
+                <div class="blog-content">
+                    <div class="blog-date">10 января 2024</div>
+                    <h3 class="blog-title"><a href="/blog/animator-guide">Как выбрать аниматора: чек-лист</a></h3>
+                    <p>На что обратить внимание при выборе ведущего для детей...</p>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="/api/placeholder/400/200" alt="Блог">
+                <div class="blog-content">
+                    <div class="blog-date">5 января 2024</div>
+                    <h3 class="blog-title"><a href="/blog/quest-review">Обзор новых квест-комнат 2024</a></h3>
+                    <p>Тестируем самые страшные и загадочные квесты города...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>FunTime.su</h4>
+                <p>Создаем праздники и хорошее настроение с 2015 года. Тысячи довольных клиентов и море позитива!</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🎵</a>
+                    <a href="#">📱</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Быстрые ссылки</h4>
+                <ul>
+                    <li><a href="/about/">О нас</a></li>
+                    <li><a href="/services/">Услуги</a></li>
+                    <li><a href="/prices/">Цены</a></li>
+                    <li><a href="/blog/">Блог</a></li>
+                    <li><a href="/forum/">Форум</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul>
+                    <li><a href="/faq/">Частые вопросы</a></li>
+                    <li><a href="/rules/">Правила</a></li>
+                    <li><a href="/privacy/">Конфиденциальность</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
+                    <li><a href="/support/">Служба поддержки</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>📞 +7 (999) 123-45-67</li>
+                    <li>✉️ info@funtime.su</li>
+                    <li>📍 Москва, ул. Праздничная, 1</li>
+                </ul>
+                <p style="margin-top: 20px;">Работаем ежедневно с 10:00 до 22:00</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 FunTime.su - Все права защищены. Веселье начинается здесь!</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Мобильное меню
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+
+        // Закрытие меню при клике на ссылку (для мобильных)
+        document.querySelectorAll('#menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('menu').classList.remove('active');
+            });
+        });
+
+        // Приветственное сообщение в консоль (для разработчиков)
+        console.log('🎉 Добро пожаловать на FunTime.su! Если нужно что-то поправить, пишите :)');
+    </script>
+
+    <!-- Подключение sitemap (для поисковиков) -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+</body>
+</html>
